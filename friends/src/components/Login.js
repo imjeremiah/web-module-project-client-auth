@@ -1,13 +1,14 @@
 import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
 
 class Login extends React.Component {
     state = {
         credentials: {
             username: "",
             password: "",
-        },
-        isLoading: false
+        }
     };
 
     handleChange = e => {
@@ -24,8 +25,6 @@ class Login extends React.Component {
         axiosWithAuth()
             .post("/api/login", this.state.credentials)
             .then(res => {
-                console.log(res);
-                // res.data.payload
                 window.localStorage.setItem("token", res.data.payload);
                 this.props.history.push("/friends-list")
             })
@@ -36,25 +35,31 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.login}>
-                    <label>Username: </label>
-                    <input 
+            <div className="form">
+            <Form className="w-25" onSubmit={this.login}>
+                <FormGroup>
+                    <Label>Username: </Label>
+                    <Input
+                         
                         type="text"
                         name="username"
                         value={this.state.credentials.username}
                         onChange={this.handleChange}
                     />
-                    <label>Password: </label>
-                    <input 
+                </FormGroup>
+                <FormGroup>
+                    <Label>Password: </Label>
+                    <Input 
                         type="password"
                         name="password"
                         value={this.state.credentials.password}
                         onChange={this.handleChange}
                     />
-                    <button>Log In</button>                    
-                </form>
+                </FormGroup>
+                <Button color="info">Log In</Button>                    
+            </Form>
             </div>
+
         );
     };
 };

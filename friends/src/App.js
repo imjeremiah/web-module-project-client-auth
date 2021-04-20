@@ -20,10 +20,10 @@ function App() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link onClick={logout} to="/login">Logout</Link>
+            <Link onClick={logout} to="/login">Logout  </Link>
           </li>
           <li>
-            <Link to="/friends-list">Friends List</Link>
+            <Link to="/friends-list">Friends</Link>
           </li>
         </ul>
         <Switch>

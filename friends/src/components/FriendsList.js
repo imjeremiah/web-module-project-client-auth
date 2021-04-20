@@ -2,6 +2,7 @@ import React from "react";
 import Loader from "react-loader-spinner";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FriendForm from "./FriendForm";
+import { Card, Button, CardTitle, CardText, CardDeck, CardBody } from "reactstrap";
 
 class FriendsList extends React.Component {
     state = {
@@ -21,7 +22,6 @@ class FriendsList extends React.Component {
         axiosWithAuth()
         .get("/api/friends")
         .then(res => {
-            console.log(res.data);
             this.setState({
                 friends: res.data
             })
@@ -42,17 +42,16 @@ class FriendsList extends React.Component {
             })
             .catch(err => {
             console.log(err);
-        })
-    }
+        });
+    };
 
     render() {
         return (
             <div>
                 <FriendForm friend={this.state.friends} friends={this.getFriends}/>
                 <div>
-                    <h1>Friends</h1>
+                    <h1 style={{ color: "green" }}>Friends</h1>
                 </div>
-             
                 <div>
                     {this.state.isLoading ? 
                         <div>
@@ -61,21 +60,23 @@ class FriendsList extends React.Component {
                         </div>
                     :  
                     this.state.friends.map(friend => (
-                        <div key={friend.id}>
-                            <div>
-                                <p>{friend.name}</p>
-                                <p>{friend.age}</p>
-                                <p>{friend.email}</p>
-                                <button onClick={(e) => {
-                                    e.preventDefault();
-                                    this.deleteFriend(friend)
-                                }
-                            }>Delete</button>
-                            </div>
+                        <div className="friends" key={friend.id}>
+                            <CardDeck>
+                                <Card>
+                                <CardTitle style={{ color: "gold" }} tag="h4">{friend.name}</CardTitle>
+                                <CardBody>
+                                    <CardText>Age: {friend.age}</CardText>
+                                    <CardText>Email: {friend.email}</CardText>
+                                    <Button outline color="danger" onClick={(e) => {
+                                        e.preventDefault();
+                                        this.deleteFriend(friend)
+                                    }
+                                    } size="md">Delete</Button>
+                                </CardBody>
+                                </Card>
+                            </CardDeck>
                         </div>
-                    ))
-
-                    }
+                    ))}
                 </div>
             </div>
         )

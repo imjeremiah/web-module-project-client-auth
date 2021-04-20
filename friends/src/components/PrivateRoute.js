@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from "react-router-dom";
+import { Alert } from 'reactstrap';
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (

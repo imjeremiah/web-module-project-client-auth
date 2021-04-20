@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from './../utils/axiosWithAuth';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const initialValues = {
   id: Date.now(),
@@ -46,40 +47,42 @@ const FriendForm = (props) => {
     };
     return (
         <section>
-            <h2>Add Friend</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label><br/>
-                    <input 
+            <h2>Add Friend</h2><br/>
+            <div className="form">
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label htmlFor="name">Name:</Label><br/>
+                    <Input 
                         onChange={handleChange} 
                         value={state.name} 
                         name="name" 
                         id='name' 
                     />
-                </div>
-                <div>
-                    <label htmlFor="age">Age:</label><br/>
-                    <input 
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="age">Age:</Label><br/>
+                    <Input 
                         onChange={handleChange} 
                         value={state.age} 
                         name="age" 
                         id="age" 
                     />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label><br/>
-                    <input 
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="email">Email:</Label><br/>
+                    <Input 
                         onChange={handleChange} 
                         value={state.email} 
                         name="email" 
                         id="email" 
                     />
-                </div>
+                </FormGroup>
                 {
-                    errorMessage && <div>Error: {errorMessage}</div>
+                    errorMessage && <div style={{ color: "red" }}>Error: {errorMessage}</div>
                 }
-                <button>Submit</button>
-            </form>
+                <Button color="primary">Submit</Button>
+            </Form>
+            </div><br/><br/>
         </section>
     );
 }
